@@ -1,11 +1,13 @@
 package com.example.mycoolweather.activity;
 
 import com.example.mycoolweather.R;
+import com.example.mycoolweather.service.AutoUpdateService;
 import com.example.mycoolweather.util.HttpCallbackListener;
 import com.example.mycoolweather.util.HttpUtil;
 import com.example.mycoolweather.util.Utility;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -29,6 +31,8 @@ public class WeatherActivity extends Activity implements OnClickListener{
 	private TextView dayWeatherText;
 	private Button switchCity;
 	private Button refreshWeather;
+	@SuppressWarnings("unused")
+	private Object getApplicationContent;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
@@ -47,6 +51,8 @@ public class WeatherActivity extends Activity implements OnClickListener{
 		switchCity.setOnClickListener(this);
 		refreshWeather.setOnClickListener(this);
 		String cityCode = getIntent().getStringExtra("city_code");
+		//Intent intent2 = new Intent(WeatherActivity.this,AutoUpdateService.class);
+		//startService(intent2);
 		if(!TextUtils.isEmpty(cityCode)){
 			updateText.setText("同步中。。。");
 			weatherInfoLayout.setVisibility(View.INVISIBLE);
@@ -61,10 +67,10 @@ public class WeatherActivity extends Activity implements OnClickListener{
 	}
 	private void queryWeatherCode(String cityCode){
 		String address = "https://api.heweather.com/x3/weather?cityid="+cityCode+"&key=81d897f0b93a4ccb8fc3da62bbb4387f";
-		queryFromServer(address,"cityCode");
+		queryFromServer(address);
 	}
 	
-	private void queryFromServer(final String address,final String type){
+	private void queryFromServer(final String address){
 		HttpUtil.sendHttpRequest(address, new HttpCallbackListener(){
 
 			@Override
@@ -85,6 +91,10 @@ public class WeatherActivity extends Activity implements OnClickListener{
 						dayWeatherText.setText(prefs.getString("day_weather", ""));
 						weatherInfoLayout.setVisibility(View.VISIBLE);
 						cityNameText.setVisibility(View.VISIBLE);
+						//成功更新天气之后开启服务并一直运行，此服务只存在一个实例
+						Intent intent2 = new Intent(WeatherActivity.this,AutoUpdateService.class);
+						startService(intent2);
+						
 					}
 					
 				});
@@ -99,7 +109,7 @@ public class WeatherActivity extends Activity implements OnClickListener{
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						updateText.setText("加载失败了");
+						updateText.setText("加载失败了，请检查网络");
 					}
 					
 				});
@@ -119,6 +129,10 @@ public class WeatherActivity extends Activity implements OnClickListener{
 			break;
 		case R.id.refresh_weather:
 			updateText.setText("更新中。。。");
+			String address = "https://api.heweather.com/x3/weather?city="+cityNameText.getText().toString()+"&key=81d897f0b93a4ccb8fc3da62bbb4387f";
+			queryFromServer(address);
+			
+			
 			
 		}
 		

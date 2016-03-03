@@ -135,8 +135,9 @@ public class Utility {
 			//JSONObject status = weatherData.getJSONObject(1);
 			//JSONObject suggesttion = weatherData.getJSONObject(2);
 			//JSONObject city          = aqi.getJSONObject("city");
-			JSONObject basic         = aqi.getJSONObject("basic");
 			JSONArray daliy_forecast  = aqi.getJSONArray("daily_forecast");//列表中存放着今天到未来七天的天气情况
+			JSONObject basic         = aqi.getJSONObject("basic");
+			
 			//JSONObject hourly_forecast = aqi.getJSONObject("hourly_forecast");
 			JSONObject now           = aqi.getJSONObject("now");
 			/**

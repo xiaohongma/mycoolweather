@@ -7,6 +7,7 @@ import com.example.mycoolweather.R;
 import com.example.mycoolweather.db.CoolWeatherDB;
 import com.example.mycoolweather.model.City;
 import com.example.mycoolweather.model.Province;
+import com.example.mycoolweather.service.AutoUpdateService;
 import com.example.mycoolweather.util.HttpCallbackListener;
 import com.example.mycoolweather.util.HttpUtil;
 import com.example.mycoolweather.util.Utility;
@@ -88,6 +89,8 @@ public class ChooseAreaActivity extends Activity {
 					Intent intent = new Intent(ChooseAreaActivity.this,WeatherActivity.class);
 					intent.putExtra("city_code", cityCode);
 					startActivity(intent);
+					//Intent intent2 = new Intent(ChooseAreaActivity.this,AutoUpdateService.class);
+					//startActivity(intent2);
 					finish();//结束当前活动
 				}
 			}
