@@ -23,6 +23,7 @@ public class HttpUtil {
     					HttpEntity entity =httpResponse.getEntity();
     					response =EntityUtils.toString(entity,"utf-8");
     				}*/
+					//String s = new String(address.getBytes(),"gbk");
 					URL url = new URL(address);
 					connection = (HttpURLConnection) url.openConnection();
 					connection.setRequestMethod("GET");//希望从服务器那里得到数据

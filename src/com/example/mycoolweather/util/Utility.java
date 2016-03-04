@@ -127,7 +127,8 @@ public class Utility {
 		}
 		return false;
 	}*/
-	public static void handleWeatherResponse(Context context,String response){
+	public static boolean handleWeatherResponse(Context context,String response){
+		boolean b =false;
 		try{
 			JSONObject jsonObject = new JSONObject(response);
 			JSONArray weatherData = jsonObject.getJSONArray("HeWeather data service 3.0");//把此条目下的数据传到JSONArray数组中
@@ -168,7 +169,7 @@ public class Utility {
 			JSONObject now_cond = now.getJSONObject("cond");
 			String now_weather = now_cond.getString("txt");
 			
-			saveWeatherData(context,cityName,cityId,updateTime,day_temp,day_weather,now_temp,now_weather);
+		b =	saveWeatherData(context,cityName,cityId,updateTime,day_temp,day_weather,now_temp,now_weather);
 			
 			
 			
@@ -176,11 +177,14 @@ public class Utility {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		return b;
 	}
-	public static void saveWeatherData(Context context,String cityName,String cityId,String updateTime,
+	public static boolean  saveWeatherData(Context context,String cityName,String cityId,String updateTime,
 			String day_temp,String day_weather,String now_temp,String now_weather){
 		SimpleDateFormat sdf = new SimpleDateFormat("yyy年M月d日",Locale.CHINA);
 		SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
+		//SharedPreferences prefs = context.getSharedPreferences("test",Context.MODE_MULTI_PROCESS);
+		//SharedPreferences.Editor editor = prefs.edit();
 		editor.putBoolean("city_selected", true);
 		editor.putString("city_name", cityName);
 		editor.putString("city_id",cityId);
@@ -191,7 +195,8 @@ public class Utility {
 		editor.putString("now_temp", now_temp);
 		editor.putString("now_weather", now_weather);
 		editor.putString("now_time", sdf.format(new Date()));
-		editor.commit();
+		boolean b=editor.commit();
+		return b;
 	}
 
 	}

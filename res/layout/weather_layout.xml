@@ -14,7 +14,6 @@
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="10dp"
-            android:text="Back"
             android:textColor="#fff"/>
         <TextView 
             android:id="@+id/city_name"
@@ -30,7 +29,6 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:text="Refresh"
             android:textColor="#fff"/>
         </RelativeLayout>
         <RelativeLayout 

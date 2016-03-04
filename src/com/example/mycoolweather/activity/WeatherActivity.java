@@ -1,5 +1,8 @@
 package com.example.mycoolweather.activity;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import com.example.mycoolweather.R;
 import com.example.mycoolweather.service.AutoUpdateService;
 import com.example.mycoolweather.util.HttpCallbackListener;
@@ -39,7 +42,9 @@ public class WeatherActivity extends Activity implements OnClickListener{
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.weather_layout);
-		weatherInfoLayout = (LinearLayout)findViewById(R.id.weather_info_layout);
+		//weatherLayout = (LinearLayout)findViewById(R.layout.weather_layout);
+		//weatherLayout.setVisibility(View.INVISIBLE);
+		//weatherInfoLayout = (LinearLayout)findViewById(R.id.weather_info_layout);
 		cityNameText = (TextView)findViewById(R.id.city_name);
 		updateText = (TextView)findViewById(R.id.publish_text);
 		currentTempText = (TextView)findViewById(R.id.current_temp);
@@ -47,7 +52,9 @@ public class WeatherActivity extends Activity implements OnClickListener{
 		dayTempText = (TextView)findViewById(R.id.day_temp);
 		dayWeatherText = (TextView)findViewById(R.id.day_weather);
 		switchCity = (Button)findViewById(R.id.switch_city);
+		switchCity.setText("Back");
 		refreshWeather = (Button)findViewById(R.id.refresh_weather);
+		refreshWeather.setText("Refresh");
 		switchCity.setOnClickListener(this);
 		refreshWeather.setOnClickListener(this);
 		String cityCode = getIntent().getStringExtra("city_code");
@@ -82,18 +89,19 @@ public class WeatherActivity extends Activity implements OnClickListener{
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(WeatherActivity.this);
+						SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplication());
 						cityNameText.setText(prefs.getString("city_name", ""));
 						updateText.setText(prefs.getString("update_time", "")+" 发布");
 						currentTempText.setText(prefs.getString("now_temp", ""));
 						currentWeatherText.setText(prefs.getString("now_weather", ""));
 						dayTempText.setText(prefs.getString("day_temp", ""));
 						dayWeatherText.setText(prefs.getString("day_weather", ""));
-						weatherInfoLayout.setVisibility(View.VISIBLE);
-						cityNameText.setVisibility(View.VISIBLE);
+						//weatherLayout.setVisibility(View.VISIBLE);
+						//weatherInfoLayout.setVisibility(View.VISIBLE);
+						//cityNameText.setVisibility(View.VISIBLE);
 						//成功更新天气之后开启服务并一直运行，此服务只存在一个实例
-						Intent intent2 = new Intent(WeatherActivity.this,AutoUpdateService.class);
-						startService(intent2);
+						//Intent intent2 = new Intent(WeatherActivity.this,AutoUpdateService.class);
+						//startService(intent2);
 						
 					}
 					
@@ -120,6 +128,7 @@ public class WeatherActivity extends Activity implements OnClickListener{
 	}
 	@Override
 	public void onClick(View v) {
+		String cityURLName;
 		// TODO Auto-generated method stub
 		switch(v.getId()){
 		case R.id.switch_city :
@@ -129,9 +138,17 @@ public class WeatherActivity extends Activity implements OnClickListener{
 			break;
 		case R.id.refresh_weather:
 			updateText.setText("更新中。。。");
-			String address = "https://api.heweather.com/x3/weather?city="+cityNameText.getText().toString()+"&key=81d897f0b93a4ccb8fc3da62bbb4387f";
-			queryFromServer(address);
+			String cityName =(String) cityNameText.getText();
+			try {
+				cityURLName =URLEncoder.encode(cityName,"utf-8");
 			
+			String address = "https://api.heweather.com/x3/weather?city="+cityURLName+"&key=81d897f0b93a4ccb8fc3da62bbb4387f";
+			queryFromServer(address);
+			}
+			catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 			
 		}
