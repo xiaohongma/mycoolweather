@@ -32,7 +32,7 @@ public class AutoUpdateService extends Service {
 			@Override
 			public void  run(){
 				updateWeather(cityName);//服务启动一次，子线程运行一次
-				Log.d("MainActivity", "test");
+				//Log.d("MainActivity", "test");
 			}
 		}).start();
 		AlarmManager manager = (AlarmManager)getSystemService(ALARM_SERVICE);//获取定时服务管理器

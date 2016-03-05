@@ -34,15 +34,12 @@ public class WeatherActivity extends Activity implements OnClickListener{
 	private TextView dayWeatherText;
 	private Button switchCity;
 	private Button refreshWeather;
-	@SuppressWarnings("unused")
-	private Object getApplicationContent;
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.weather_layout);
-		//weatherLayout = (LinearLayout)findViewById(R.layout.weather_layout);
+		weatherInfoLayout = (LinearLayout)findViewById(R.id.weather_info_layout);
 		//weatherLayout.setVisibility(View.INVISIBLE);
 		//weatherInfoLayout = (LinearLayout)findViewById(R.id.weather_info_layout);
 		cityNameText = (TextView)findViewById(R.id.city_name);
@@ -97,8 +94,8 @@ public class WeatherActivity extends Activity implements OnClickListener{
 						dayTempText.setText(prefs.getString("day_temp", ""));
 						dayWeatherText.setText(prefs.getString("day_weather", ""));
 						//weatherLayout.setVisibility(View.VISIBLE);
-						//weatherInfoLayout.setVisibility(View.VISIBLE);
-						//cityNameText.setVisibility(View.VISIBLE);
+						weatherInfoLayout.setVisibility(View.VISIBLE);
+						cityNameText.setVisibility(View.VISIBLE);
 						//成功更新天气之后开启服务并一直运行，此服务只存在一个实例
 						//Intent intent2 = new Intent(WeatherActivity.this,AutoUpdateService.class);
 						//startService(intent2);

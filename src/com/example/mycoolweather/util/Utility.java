@@ -39,7 +39,7 @@ public class Utility {
 			}
 			HashSet<String> hs = new HashSet<String>(list);
 	       list.clear();
-	       list.addAll(hs);
+	       list.addAll(hs);//去除重复数据
 	        for(String provinceName:list){
 	        	Province province = new Province();
 	        	province.setProvinceName(provinceName);
