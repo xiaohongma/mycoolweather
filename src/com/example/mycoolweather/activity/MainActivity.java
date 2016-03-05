@@ -2,6 +2,11 @@ package com.example.mycoolweather.activity;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+
+import net.youmi.android.AdManager;
+import net.youmi.android.banner.AdSize;
+import net.youmi.android.banner.AdView;
+
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -14,6 +19,10 @@ import com.example.mycoolweather.util.HttpUtil;
 import com.example.mycoolweather.util.Utility;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
+//import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -41,6 +50,7 @@ public class MainActivity extends Activity implements OnClickListener{
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
+		AdManager.getInstance(this).init("ede420eac31fbe62", "7911fffe481ec88d",false);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.weather_layout);
 		weatherInfoLayout = (LinearLayout)findViewById(R.id.weather_info_layout);
@@ -50,6 +60,10 @@ public class MainActivity extends Activity implements OnClickListener{
 		currentWeatherText = (TextView)findViewById(R.id.current_weather);
 		dayTempText = (TextView)findViewById(R.id.day_temp);
 		dayWeatherText = (TextView)findViewById(R.id.day_weather);
+		AdView adView = new AdView(this,AdSize.FIT_SCREEN);
+		LinearLayout adLayout = (LinearLayout)findViewById(R.id.adLayout);
+		adLayout.addView(adView);//¼ÓÈë¹ã¸æ
+		
 		switchCity = (Button)findViewById(R.id.switch_city);
 		refreshWeather = (Button)findViewById(R.id.refresh_weather);
 		switchCity.setText("Switch");
@@ -113,6 +127,12 @@ public class MainActivity extends Activity implements OnClickListener{
 		
 		
 	}
+	/*@Override
+	protected void onStart(){
+		super.onStart();
+		dialog();
+	}*/
+	
 	
 
 	
@@ -204,7 +224,28 @@ option.setEnableSimulateGps(false);//¿ÉÑ¡£¬Ä¬ÈÏfalse£¬ÉèÖÃÊÇ·ñÐèÒª¹ýÂËgps·ÂÕæ½á¹
        client.setLocOption(option);
     }
 	
+	/*protected void dialog() {
+	 AlertDialog.Builder builder = new Builder(MainActivity.this);
+	 builder.setCancelable(false);
+	 builder.setMessage("ÄúµÄÑÕÖµ¹ý¸ß£¬¿ÉÄÜÓ°ÏìÌìÆø»ñÈ¡£¡£¡£¡");
+	builder.setTitle("ÑÕÖµÔ¤¾¯");
+	builder.setPositiveButton("ÎÒÈÏ×ï£¡", new android.content.DialogInterface.OnClickListener() {
+		public void onClick(DialogInterface dialog, int which) {
+			
+	       dialog.dismiss();
+		  }
+   });
 		
+   builder.setNegativeButton("ÎÒ²»·þ£¡", new android.content.DialogInterface.OnClickListener() {
+	@Override
+	  public void onClick(DialogInterface dialog, int which) {
+       dialog.dismiss();
+       finish();
+       }
+
+	  });
+	builder.create().show();
+	 }	*/
 
 	
 }

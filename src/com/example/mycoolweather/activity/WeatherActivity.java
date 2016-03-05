@@ -3,6 +3,9 @@ package com.example.mycoolweather.activity;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
+import net.youmi.android.banner.AdSize;
+import net.youmi.android.banner.AdView;
+
 import com.example.mycoolweather.R;
 import com.example.mycoolweather.util.HttpCallbackListener;
 import com.example.mycoolweather.util.HttpUtil;
@@ -46,6 +49,9 @@ public class WeatherActivity extends Activity implements OnClickListener{
 		currentWeatherText = (TextView)findViewById(R.id.current_weather);
 		dayTempText = (TextView)findViewById(R.id.day_temp);
 		dayWeatherText = (TextView)findViewById(R.id.day_weather);
+		//AdView adView = new AdView(this,AdSize.FIT_SCREEN);
+		//LinearLayout adLayout = (LinearLayout)findViewById(R.id.adLayout);
+		//adLayout.addView(adView);//加入广告
 		switchCity = (Button)findViewById(R.id.switch_city);
 		switchCity.setText("Back");
 		refreshWeather = (Button)findViewById(R.id.refresh_weather);

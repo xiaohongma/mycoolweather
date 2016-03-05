@@ -3,6 +3,8 @@ package com.example.mycoolweather.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.youmi.android.AdManager;
+
 import com.example.mycoolweather.R;
 import com.example.mycoolweather.db.CoolWeatherDB;
 import com.example.mycoolweather.model.City;
@@ -63,7 +65,7 @@ public class ChooseAreaActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
-		
+		//AdManager.getInstance(this).init("ede420eac31fbe62", "7911fffe481ec88d",false);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.choose_area);
 		//Log.d("ChooseArea","QWERTYU");
