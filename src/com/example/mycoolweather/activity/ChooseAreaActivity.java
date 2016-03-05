@@ -7,7 +7,6 @@ import com.example.mycoolweather.R;
 import com.example.mycoolweather.db.CoolWeatherDB;
 import com.example.mycoolweather.model.City;
 import com.example.mycoolweather.model.Province;
-import com.example.mycoolweather.service.AutoUpdateService;
 import com.example.mycoolweather.util.HttpCallbackListener;
 import com.example.mycoolweather.util.HttpUtil;
 import com.example.mycoolweather.util.Utility;

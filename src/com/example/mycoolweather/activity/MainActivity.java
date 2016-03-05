@@ -2,8 +2,6 @@ package com.example.mycoolweather.activity;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.List;
-
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -16,11 +14,8 @@ import com.example.mycoolweather.util.HttpUtil;
 import com.example.mycoolweather.util.Utility;
 
 import android.app.Activity;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -74,11 +69,9 @@ public class MainActivity extends Activity implements OnClickListener{
 			@Override
 			public void onReceiveLocation(BDLocation location) {
 				if(location != null){
-				// TODO Auto-generated method stub
-				//int  a = location.getLocType();
 				
-				//cityName = location.getCity();
-					cityName ="香格里拉傣族自治州";
+				cityName = location.getCity();
+					//cityName ="香格里拉傣族自治州";
 				//String cityName2 = cityName.substring(0, 2);
 				String cityName2 = HandleCityName.handleCityName(cityName);
 				updateWeather(cityName2);

@@ -4,13 +4,11 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import com.example.mycoolweather.R;
-import com.example.mycoolweather.service.AutoUpdateService;
 import com.example.mycoolweather.util.HttpCallbackListener;
 import com.example.mycoolweather.util.HttpUtil;
 import com.example.mycoolweather.util.Utility;
 
 import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
